@@ -2,8 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
-
+subtitle: PhD Student, <a href="https://www.se.cuhk.edu.hk/">Department of Systems Engineering and Engineering Management</a>, The Chinese University of Hong Kong.
 profile:
   align: right
   image: prof_pic.jpg
