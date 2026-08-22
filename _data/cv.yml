@@ -23,7 +23,7 @@ cv:
       - institution: The Chinese University of Hong Kong
         location: Hong Kong SAR
         area: Financial Engineering 
-        summary: Supervisor: Prof. Nan Chen
+        summary: "Supervisor: Prof. Nan Chen"
         studyType: Ph.D.
         start_date: Aug 2024
         end_date: Jul 2028
@@ -48,7 +48,7 @@ cv:
         location: Oxford, UK
         start_date: Mar 2026
         end_date: Jun 2026
-        summary: Host Supervisor: Prof. Álvaro Cartea
+        summary: "Host Supervisor: Prof. Álvaro Cartea"
 
     Awards:
       - title: Nobel Prize in Physics
