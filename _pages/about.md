@@ -10,7 +10,7 @@ profile:
   more_info: >
     <p>810B, ERB</p>
     <p>123@link.cuhk.edu.hk</p>
-    <p>Hong Kong</p>
+    <p>Hong Kong SAR</p>
 
 selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
