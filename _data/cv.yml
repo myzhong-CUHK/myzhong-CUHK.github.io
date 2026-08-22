@@ -22,12 +22,10 @@ cv:
     Education:
       - institution: The Chinese University of Hong Kong
         location: Hong Kong SAR
-        url: https://www.uzh.ch/
         area: Financial Engineering 
         studyType: Ph.D.
         start_date: Aug 2024
         end_date: Jul 2028
-        score: ""
         courses: "Theory of Relativity"
 
       - institution: Tsinghua University
@@ -45,15 +43,12 @@ cv:
         end_date: Jun 2022
 
     Experience:
-      - company: Institute for Advanced Study, Princeton University
-        position: Professor of Theoretical Physics
-        location: Princeton University, NJ
-        start_date: 1933
-        end_date: 1955
-        summary: Teaching at Palmer Physical Laboratory (now 302 Frist Campus Center). While not a professor at Princeton, I associated with the physics professors and continued to give lectures on campus.
-        highlights:
-          - Relativity
-          - Description 2.
+      - company: Oxford-Man Institute of Quantitative Finance, University of Oxford
+        position: Visiting Student
+        location: Oxford, UK
+        start_date: Mar 2026
+        end_date: Jun 2026
+        summary: Host Supervisor: Prof. Álvaro Cartea
 
     Awards:
       - title: Nobel Prize in Physics
