@@ -1,22 +1,22 @@
+# 这份文件同时被两个东西读取，两边的要求不一样，改之前先看清楚：
+#   1) 网站的 /cv/ 页面      —— al-folio 的 Liquid 模板，比较宽松
+#   2) Render a CV 工作流    —— Python 的 rendercv，会严格校验，不合格整个工作流报红
+#
+# rendercv 的三条硬性要求：
+#   · 所有日期只能是 YYYY / YYYY-MM / YYYY-MM-DD / present，写 "Aug 2024" 会直接报错
+#   · cv: 根层不能有 label / image / address 这三个字段
+#   · 条目里的额外字段必须是字符串，纯数字要加引号（如 releaseDate: "2026"）
+#
+# YAML 通则：值里出现「冒号 + 空格」或 "#"，整条必须加英文双引号。
+
 cv:
   name: Mingyue Zhong
-  label: Scientist
-  email: einstein@example.com
-  location: Princeton, NJ
-  image: ""
-  
-  social_networks:
-    - network: X
-      username: AlbertEinstein
-    - network: GitHub
-      username: example
-    - network: LinkedIn
-      username: example
+  email: myzhong@se.cuhk.edu.hk
+  location: Hong Kong SAR
 
-  address:
-    street: ERB810B
-    city: CUHK
-    region: Hong Kong SAR
+  social_networks:
+    - network: GitHub
+      username: myzhong-CUHK
 
   sections:
     Education:
@@ -55,66 +55,68 @@ cv:
         end_date: 2026-06
         summary: "Host Supervisor: Prof. Álvaro Cartea"
 
-    Awards:
-      - title: Nobel Prize in Physics
-        authors:
-          - "Royal Swedish Academy of Sciences"
-        date: 1921-11-01
-        awarder: Royal Swedish Academy of Sciences
-        url: https://www.nobelprize.org/prizes/physics/1921/einstein/biographical/
-        summary: The Nobel Prizes are five separate prizes that, according to Alfred Nobel's will of 1895, are awarded to 'those who, during the preceding year, have conferred the greatest benefit to humankind.'
-
-      - title: Max Planck Medal
-        authors:
-          - "German Physical Society"
-        date: 2029
-        awarder: German Physical Society
-        summary: Awarded for outstanding scientific achievement
-
     Publications:
-      - title: Zur Elektrodynamik bewegter Körper
+      - title: AI Bubbles with Large Language Models
         authors:
-          - Albert Einstein
-        publisher: Annalen der Physik
-        releaseDate: 1905-06-30
-        url: https://en.wikisource.org/wiki/Translation:On_the_Electrodynamics_of_Moving_Bodies
-        summary: It concerned an interpretation of the Michelson–Morley experiment and the properties of light and time. Special relativity incorporates the principle that the speed of light is the same for all inertial observers regardless of the state of motion of the source.
+          - Álvaro Cartea
+          - Patrick Chang
+          - Nan Chen
+          - Mingyue Zhong
+        journal: Working paper
+        publisher: Working paper
+        date: "2026"
+        releaseDate: "2026"
 
-      - title: Über einen die Erzeugung und Verwandlung des Lichtes betreffenden heuristischen Gesichtspunkt
+      - title: The Price of Proof-of-Stake Security
         authors:
-          - Albert Einstein
-        publisher: Annalen der Physik
-        releaseDate: 1905-03-18
-        url: https://de.wikisource.org/wiki/Über_einen_die_Erzeugung_und_Verwandlung_des_Lichtes_betreffenden_heuristischen_Gesichtspunkt
-        summary: In the second paper, he applied the quantum theory to light to explain the photoelectric effect. In particular, he used the idea of light quanta (photons) to explain experimental results, but stressed the importance of the experimental results. The importance of his work on the photoelectric effect earned him the Nobel Prize in Physics in 1921.
+          - Álvaro Cartea
+          - Nan Chen
+          - Fayçal Drissi
+          - Mingyue Zhong
+        journal: Working paper
+        publisher: Working paper
+        date: "2026"
+        releaseDate: "2026"
 
-      - title: Die Grundlage der allgemeinen Relativitätstheorie
+      - title: "Belief-Based Two-Timescale Learning in General-Sum Stochastic Games: Convergence, Equilibrium Selection, and Algorithmic Collusion"
         authors:
-          - Albert Einstein
-        publisher: Annalen der Physik
-        releaseDate: 1916-03-20
-        url: https://de.wikisource.org/wiki/Die_Grundlage_der_allgemeinen_Relativitätstheorie
-        summary: The publication of the theory of general relativity made him internationally famous. He was professor of physics at the universities of Zurich (1909–1911) and Prague (1911–1912), before he returned to ETH Zurich (1912–1914).
+          - Nan Chen
+          - Mingyue Zhong
+        journal: Working paper
+        publisher: Working paper
+        date: "2026"
+        releaseDate: "2026"
+
+      - title: Belief-Based Two-Timescale Learning in Stochastic Games with Function Approximation
+        authors:
+          - Nan Chen
+          - Sebastian Jaimungal
+          - Mingyue Zhong
+        journal: Working paper
+        publisher: Working paper
+        date: "2026"
+        releaseDate: "2026"
 
     Languages:
-      - name: German
-        summary: "Native speaker"
+      - name: Chinese (Mandarin)
+        summary: Native speaker
 
       - name: English
-        summary: "Fluent"
+        summary: Fluent
 
-    Interests:
-      - name: Physics
-        icon: fa-solid fa-tag
-        keywords: "Quantum Mechanics, Quantum Computing, Quantum Information, Quantum Cryptography, Quantum Communication, Quantum Teleportation"
-
-
-
-    References:
-      - name: Professor John Doe
-        icon: fa-solid fa-laptop
-        reference: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit.
-
-      - name: Professor Jane Smith
-        icon: fa-solid fa-thumbtack
-        reference: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit.
+    # 下面几段先注释掉了，有内容时把行首的 # 去掉，缩进对齐 Education（4 个空格）。
+    #
+    # Awards:
+    #   - title: 奖项名称
+    #     awarder: 颁发机构
+    #     date: "2026"
+    #     summary: 一句话说明
+    #
+    # Skills:
+    #   - name: Programming
+    #     level: Advanced
+    #     keywords: "Python, PyTorch, JAX, C++"
+    #
+    # Interests:
+    #   - name: Research
+    #     keywords: "Multi-agent RL, stochastic games, market microstructure, blockchain"
