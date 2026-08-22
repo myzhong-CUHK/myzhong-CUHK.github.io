@@ -22,8 +22,9 @@ cv:
     Education:
       - institution: The Chinese University of Hong Kong
         location: Hong Kong SAR
-        area: Financial Engineering 
-        summary: "Supervisor: Prof. Nan Chen"
+        area: Financial Engineering         
+        highlights:
+          - "Supervisor: [Prof. Nan Chen](https://www.se.cuhk.edu.hk/people/academic-staff/prof-chen-nan/)"
         studyType: Ph.D.
         start_date: Aug 2024
         end_date: Jul 2028
