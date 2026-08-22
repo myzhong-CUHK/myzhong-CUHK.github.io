@@ -10,10 +10,10 @@ profile:
   more_info: >
     <p>810B, ERB</p>
     <p>123@link.cuhk.edu.hk</p>
-    <p>Hong Kong SAR</p>
+    <p>S.T., N.T., Hong Kong SAR</p>
 
 selected_papers: false # includes a list of papers marked as "selected={true}"
-social: true # includes social icons at the bottom of the page
+social: false # includes social icons at the bottom of the page
 
 announcements:
   enabled: false # includes a list of news items
@@ -26,9 +26,8 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-PhD
+I am a PhD student in the Department of Systems Engineering and Engineering Management at
+The Chinese University of Hong Kong, where I am advised by Prof.
+[Nan Chen](https://www.se.cuhk.edu.hk/people/academic-staff/prof-chen-nan/).
 
-Put your address / P.O. box / other info right below your picture. 
-You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
-
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+My research sits between multi-agent reinforcement learning and financial markets. I also work on DeFi.
