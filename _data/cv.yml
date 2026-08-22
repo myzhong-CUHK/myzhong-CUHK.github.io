@@ -22,33 +22,37 @@ cv:
     Education:
       - institution: The Chinese University of Hong Kong
         location: Hong Kong SAR
-        area: Financial Engineering         
+        area: Financial Engineering
+        degree: Ph.D.
+        studyType: Ph.D.
+        start_date: 2024-08
+        end_date: 2028-07
+        # Education 这一节不渲染 summary，导师要写在 highlights 里（支持 Markdown 链接）
         highlights:
           - "Supervisor: [Prof. Nan Chen](https://www.se.cuhk.edu.hk/people/academic-staff/prof-chen-nan/)"
-        studyType: Ph.D.
-        start_date: Aug 2024
-        end_date: Jul 2028
 
       - institution: Tsinghua University
         location: Beijing, China
         area: Applied Statistics
+        degree: M.S.
         studyType: M.S.
-        start_date: Sep 2022
-        end_date: Jun 2024
+        start_date: 2022-09
+        end_date: 2024-06
 
       - institution: Wuhan University
         location: Wuhan, China
         area: Statistics
+        degree: B.S.
         studyType: B.S.
-        start_date: Sep 2018
-        end_date: Jun 2022
+        start_date: 2018-09
+        end_date: 2022-06
 
     Experience:
       - company: Oxford-Man Institute of Quantitative Finance, University of Oxford
         position: Visiting Student
         location: Oxford, UK
-        start_date: Mar 2026
-        end_date: Jun 2026
+        start_date: 2026-03
+        end_date: 2026-06
         summary: "Host Supervisor: Prof. Álvaro Cartea"
 
     Awards:
