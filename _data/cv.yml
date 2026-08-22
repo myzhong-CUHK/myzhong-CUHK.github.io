@@ -25,8 +25,8 @@ cv:
         url: https://www.uzh.ch/
         area: Financial Engineering 
         studyType: Ph.D.
-        start_date: Aug 2024
-        end_date: Jul 2028 (expected)
+        start_date: 2024
+        end_date: 2028
         score: ""
         courses: "Theory of Relativity"
 
@@ -34,15 +34,15 @@ cv:
         location: Beijing, China
         area: Applied Statistics
         studyType: M.S.
-        start_date: Sep 2022
-        end_date: Jun 2024
+        start_date: 2022
+        end_date: 2024
 
       - institution: Wuhan University
         location: Wuhan, China
         area: Statistics
         studyType: B.S.
-        start_date: Sep 2018
-        end_date: Jun 2022
+        start_date: 2018
+        end_date: 2022
 
     Experience:
       - company: Institute for Advanced Study, Princeton University
