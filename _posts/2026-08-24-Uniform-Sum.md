@@ -28,21 +28,21 @@ $$
 Taking expectations gives the renewal equation
 
 $$
-f(a) = \int_a^1 x \, dx + \int_0^a f(a - x) \, dx
-     = \frac{1 - a^2}{2} + \int_0^a f(u) \, du ,
+f(a) = \int_a^1 x \, dx + \int_0^a f(a - x)  dx
+     = \frac{1 - a^2}{2} + \int_0^a f(u)  du ,
 $$
 
-with $f(0) = \int_0^1 x \, dx = \tfrac{1}{2}$. Differentiating turns it into a
+with $f(0) = \int_0^1 x  dx = \tfrac{1}{2}$. Differentiating turns it into a
 first-order ODE,
 
 $$
-f'(a) = f(a) - a , \qquad f(0) = \tfrac{1}{2} ,
+f'(a) = f(a) - a , \qquad f(0) = \frac{1}{2} ,
 $$
 
 whose solution is
 
 $$
-f(a) = a + 1 - \tfrac{1}{2} e^{a} .
+f(a) = a + 1 - \frac{1}{2} e^{a} .
 $$
 
 Therefore
