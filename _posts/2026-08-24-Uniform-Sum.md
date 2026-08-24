@@ -1,48 +1,52 @@
 ---
 layout: post
-title: Uniform Sum 
-date: 2026-08-24
+title: Uniform Sum
+date: 2026-08-24 10:00:00+0800
 description: Interesting Problem in Quant Interview
-tags: Probability
-categories: Quant
-chart:
-  plotly: false
+tags: probability
+categories: quant
 ---
 
-````markdown
-**
-Problem:
-**
-Numbers are drawn uniformly at random from [0, 1] until their sum exceeds 1. Find the expected value of the last number drawn.
+**Problem.** Numbers are drawn uniformly at random from $[0, 1]$ until their sum
+exceeds $1$. Find the expected value of the last number drawn.
 
+**Solution.** Let $X_1, X_2, \dots \sim \mathcal{U}(0, 1)$ be i.i.d., and for
+$a \in [0, 1]$ let $T(a) = \inf\\{m : \sum_{i=1}^m X_i \geq a\\}$. Denote
+$f(a) = \mathbb{E}[X_{T(a)}]$.
 
+Conditioning on the first draw, $\mathbb{E}[X_{T(a)}] = \mathbb{E}\left[\mathbb{E}[X_{T(a)} \mid X_1]\right]$, where
 
-**
-Solution:
-**
-Let $X_1, \cdots, X_n, \cdots \sim \mathcal{U}(0, 1)$, and $T(a) = \inf\{m: \sum_{i=1}^m X_i \geq a\}$ with $a \in [0, 1]$. Denote $f(a) = \mathbb{E}[X_{T(a)}]$.
-
-Then we have $\mathbb{E}[X_{T(a)}] = \mathbb{E}\left[ \mathbb{E}[X_{T(a)} | X_1] \right]$, where
-\begin{eqnarray}
-\mathbb{E}[X_{T(a)} | X_1]
+$$
+\mathbb{E}[X_{T(a)} \mid X_1]
 =
 \begin{cases}
-X_1 &\text{ if } X_1 \geq a\\
-X_{T(a-X_1)} &\text{ else}.
+X_1 & \text{if } X_1 \geq a, \\
+X_{T(a - X_1)} & \text{otherwise.}
 \end{cases}
-\end{eqnarray}
-In other words, we obtain
 $$
-f(a) = \int_a^1 x d x + \int_0^a f(a-x) dx,
-$$
-with $f(0) = \frac12$.
 
-Solving this ODE leads to
+Taking expectations gives the renewal equation
+
 $$
-f(x) = x+1-0.5e^{x},
+f(a) = \int_a^1 x \, dx + \int_0^a f(a - x) \, dx
+     = \frac{1 - a^2}{2} + \int_0^a f(u) \, du ,
 $$
-and
+
+with $f(0) = \int_0^1 x \, dx = \tfrac{1}{2}$. Differentiating turns it into a
+first-order ODE,
+
 $$
-\mathbb{E}[X_{T(1)}] = f(1) = 2 - \frac{e^{1}}{2}.
+f'(a) = f(a) - a , \qquad f(0) = \tfrac{1}{2} ,
 $$
-````
+
+whose solution is
+
+$$
+f(a) = a + 1 - \tfrac{1}{2} e^{a} .
+$$
+
+Therefore
+
+$$
+\mathbb{E}[X_{T(1)}] = f(1) = 2 - \frac{e}{2} .
+$$
