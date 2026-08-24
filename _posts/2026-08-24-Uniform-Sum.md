@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Uniform Sum 
-date: 2026-08-24-uniform-sum
+date: 2026-08-24
 description: Interesting Problem in Quant Interview
 tags: Probability
 categories: Quant
