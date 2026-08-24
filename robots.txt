@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://myzhong-CUHK.github.io/sitemap.xml
+Sitemap: https://myzhong-cuhk.github.io/sitemap.xml
