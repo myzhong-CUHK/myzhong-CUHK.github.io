@@ -1,1 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://myzhong-cuhk.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://myzhong-cuhk.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2026-08-24T05:33:26+00:00</updated><id>https://myzhong-cuhk.github.io/feed.xml</id><title type="html">blank</title><subtitle>Academic homepage of Mingyue Zhong, PhD student in Systems Engineering and Engineering Management at The Chinese University of Hong Kong. </subtitle></feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://myzhong-cuhk.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://myzhong-cuhk.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2026-08-24T05:34:47+00:00</updated><id>https://myzhong-cuhk.github.io/feed.xml</id><title type="html">blank</title><subtitle>Academic homepage of Mingyue Zhong, PhD student in Systems Engineering and Engineering Management at The Chinese University of Hong Kong. </subtitle><entry><title type="html">Uniform Sum</title><link href="https://myzhong-cuhk.github.io/blog/2026/Uniform-Sum/" rel="alternate" type="text/html" title="Uniform Sum"/><published>2026-08-24T00:00:00+00:00</published><updated>2026-08-24T00:00:00+00:00</updated><id>https://myzhong-cuhk.github.io/blog/2026/Uniform-Sum</id><content type="html" xml:base="https://myzhong-cuhk.github.io/blog/2026/Uniform-Sum/"><![CDATA[<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ge">**</span>
+Problem:
+<span class="ge">**</span>
+Numbers are drawn uniformly at random from [0, 1] until their sum exceeds 1. Find the expected value of the last number drawn.<span class="sb">
+
+
+
+</span><span class="ge">**</span>
+Solution:
+<span class="ge">**</span>
+Let $X_1, <span class="se">\c</span>dots, X_n, <span class="se">\c</span>dots <span class="se">\s</span>im <span class="se">\m</span>athcal{U}(0, 1)$, and $T(a) = <span class="se">\i</span>nf<span class="se">\{</span>m: <span class="se">\s</span>um_{i=1}^m X_i <span class="se">\g</span>eq a<span class="se">\}</span>$ with $a <span class="se">\i</span>n [0, 1]$. Denote $f(a) = <span class="se">\m</span>athbb{E}[X_{T(a)}]$.
+
+Then we have $<span class="se">\m</span>athbb{E}[X_{T(a)}] = <span class="se">\m</span>athbb{E}<span class="se">\l</span>eft[ <span class="se">\m</span>athbb{E}[X_{T(a)} | X_1] <span class="se">\r</span>ight]$, where
+<span class="se">\b</span>egin{eqnarray}
+<span class="se">\m</span>athbb{E}[X_{T(a)} | X_1]
+=
+<span class="se">\b</span>egin{cases}
+X_1 &amp;<span class="se">\t</span>ext{ if } X_1 <span class="se">\g</span>eq a<span class="se">\\</span>
+X_{T(a-X_1)} &amp;<span class="se">\t</span>ext{ else}.
+<span class="se">\e</span>nd{cases}
+<span class="se">\e</span>nd{eqnarray}
+In other words, we obtain
+$$
+f(a) = <span class="se">\i</span>nt_a^1 x d x + <span class="se">\i</span>nt_0^a f(a-x) dx,
+$$
+with $f(0) = <span class="se">\f</span>rac12$.
+
+Solving this ODE leads to
+$$
+f(x) = x+1-0.5e^{x},
+$$
+and
+$$
+<span class="se">\m</span>athbb{E}[X_{T(1)}] = f(1) = 2 - <span class="se">\f</span>rac{e^{1}}{2}.
+$$
+</code></pre></div></div>]]></content><author><name></name></author><category term="Quant"/><category term="Probability"/><summary type="html"><![CDATA[Interesting Problem in Quant Interview]]></summary></entry></feed>
