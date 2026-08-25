@@ -138,7 +138,7 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # -----------------------------------------------------------------------------
 
 blog_name: notes # blog 页顶部的大标题
-blog_description: occasional notes on research
+blog_description: Some Interesting Notes
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
 
