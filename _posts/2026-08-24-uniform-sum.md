@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Uniform Sum
+title: niform Sum
 date: 2026-08-24 10:00:00+0800
 description: Interesting Problem in Quant Interview
 tags: probability
