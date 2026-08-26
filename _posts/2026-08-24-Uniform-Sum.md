@@ -30,16 +30,19 @@ Taking expectations gives
 $$
 f(a) = \int_a^1 x \, dx + \int_0^a f(a - x)  dx,
 $$
+
 with $f(0) = \frac{1}{2}$. Differentiating turns it into an ODE,
 
 $$
 f'(a) = f(a) - a , \qquad f(0) = \frac{1}{2} ,
 $$
+
 whose solution is
 
 $$
 f(a) = a + 1 - \frac{1}{2} e^{a} .
 $$
+
 Therefore
 
 $$
