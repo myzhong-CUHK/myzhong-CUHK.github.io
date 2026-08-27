@@ -7,10 +7,12 @@ tags: probability
 categories: quant
 ---
 
-**Problem.** Numbers are drawn uniformly at random from $[0, 1]$ until their sum
+# Problem.
+Numbers are drawn uniformly at random from $[0, 1]$ until their sum
 exceeds $1$. Find the expected value of the last number drawn.
 
-**Solution.** Let $X_1, X_2, \dots \sim \mathcal{U}(0, 1)$ be i.i.d., and for
+# Solution.
+Let $X_1, X_2, \dots \sim \mathcal{U}(0, 1)$ be i.i.d., and for
 $a \in [0, 1]$, let $T(a) = \inf\\{m : \sum_{i=1}^m X_i \geq a\\}$. Denote
 $f(a) = \mathbb{E}[X_{T(a)}]$.
 
