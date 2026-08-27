@@ -7,9 +7,11 @@ tags: brain-teaser
 categories: quant
 ---
 
-**Problem.** Find the total count of 1s when all integers from $1$ to $2^n - 1$ are expressed in binary.
+# Problem.
+Find the total count of 1s when all integers from $1$ to $2^n - 1$ are expressed in binary.
 
-**Solution.** Let $S(n)$ be the number of 1s in the binary expansions of $0, \dots, 2^n - 1$, each
+# Solution.
+Let $S(n)$ be the number of 1s in the binary expansions of $0, \dots, 2^n - 1$, each
 padded with leading zeros to length $n$. Padding creates no 1 and the integer $0$ carries none, so
 $S(n)$ is the count asked for. The gain is that the $2^n$ padded expansions run over all binary
 strings of length $n$, each occurring once.
