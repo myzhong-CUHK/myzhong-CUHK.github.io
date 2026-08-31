@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Cards Game
+title: Drunk Passenger
 date: 2026-08-31 10:00:00+0800
 description: Interesting Problem in Quant Interview
 tags: probability
