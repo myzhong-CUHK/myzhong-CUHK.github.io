@@ -12,10 +12,7 @@ categories: quant
 Find the total count of 1s when all integers from $1$ to $2^n - 1$ are expressed in binary.
 
 # Solution.
-Let $S(n)$ be the number of 1s in the binary expansions of $0, \dots, 2^n - 1$, each
-padded with leading zeros to length $n$. Padding creates no 1 and the integer $0$ carries none, so
-$S(n)$ is the count asked for. The gain is that the $2^n$ padded expansions run over all binary
-strings of length $n$, each occurring once.
+Let $S(n)$ be the number of 1s in the binary expansions of $0, \dots, 2^n - 1$, each padded with leading zeros to length $n$. Padding creates no 1 and the integer $0$ carries none, so $S(n)$ is the count asked for. The gain is that the $2^n$ padded expansions run over all binary strings of length $n$, each occurring once.
 
 ### Method 1: Direct calculation
 
@@ -45,16 +42,13 @@ $$
 
 ### Method 2: Counting column by column
 
-Fix one of the $n$ digit positions. A string carries a 1 there precisely when its remaining $n-1$
-positions are filled arbitrarily, which happens for $2^{n-1}$ of the strings. Every position
-contributes equally, so
+Fix one of the $n$ digit positions. A string carries a 1 there precisely when its remaining $n-1$ positions are filled arbitrarily, which happens for $2^{n-1}$ of the strings. Every position contributes equally, so
 
 $$
 S(n) = n \cdot 2^{n-1}.
 $$
 
-Equivalently, if an integer is drawn uniformly from $0$ to $2^n - 1$, its $n$ bits are independent
-and equal to 1 with probability $1/2$, whence by linearity of expectation
+Equivalently, if an integer is drawn uniformly from $0$ to $2^n - 1$, its $n$ bits are independent and equal to 1 with probability $1/2$, whence by linearity of expectation
 
 $$
 S(n) = 2^n \cdot \mathbb{E}\left[\text{number of 1s}\right] = 2^n \cdot \frac{n}{2} = n 2^{n-1}.
@@ -69,9 +63,7 @@ $$
 \left(\text{1s in } k\right) + \left(\text{1s in } 2^n - 1 - k\right) = n.
 $$
 
-No integer pairs with itself, since $k = 2^n - 1 - k$ would force $2k = 2^n - 1$ with an even left
-side and an odd right side. The $2^n$ integers therefore split into $2^{n-1}$ pairs of $n$ ones
-each, and
+No integer pairs with itself, since $k = 2^n - 1 - k$ would force $2k = 2^n - 1$ with an even left side and an odd right side. The $2^n$ integers therefore split into $2^{n-1}$ pairs of $n$ ones each, and
 
 $$
 S(n) = 2^{n-1} \cdot n.
@@ -79,9 +71,7 @@ $$
 
 ### Method 4: Recursion on the leading bit
 
-Split the strings of length $n$ by their leading digit. Deleting a leading 0 leaves every string of
-length $n-1$ once and destroys no 1, while deleting a leading 1 leaves every string of length $n-1$
-once and discards $2^{n-1}$ ones in total. Hence
+Split the strings of length $n$ by their leading digit. Deleting a leading 0 leaves every string of length $n-1$ once and destroys no 1, while deleting a leading 1 leaves every string of length $n-1$ once and discards $2^{n-1}$ ones in total. Hence
 
 $$
 \begin{aligned}
@@ -91,9 +81,7 @@ S(n)
 \end{aligned}
 $$
 
-the initial value recording that the only string of length $0$ is the empty one. Dividing by $2^n$
-turns the recursion into a statement about the average number of 1s per integer, which grows by
-$1/2$ with each further digit,
+the initial value recording that the only string of length $0$ is the empty one. Dividing by $2^n$ turns the recursion into a statement about the average number of 1s per integer, which grows by $1/2$ with each further digit,
 
 $$
 \frac{S(n)}{2^n} = \frac{S(n-1)}{2^{n-1}} + \frac{1}{2} = \cdots = \frac{S(0)}{2^0} + \frac{n}{2} = \frac{n}{2},

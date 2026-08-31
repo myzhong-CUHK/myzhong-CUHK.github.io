@@ -9,8 +9,7 @@ categories: quant
 
 # Problem. 
 
-Gambler $A$ has $N+1$ fair coins and gambler $B$ has $N$. Both toss all of their coins.
-What is the probability that $A$ gets strictly more heads than $B$?
+Gambler $A$ has $N+1$ fair coins and gambler $B$ has $N$. Both toss all of their coins. What is the probability that $A$ gets strictly more heads than $B$?
 
 # Solution.
 
@@ -18,8 +17,7 @@ Write $A$ and $B$ for the two head counts, so $A \sim \mathrm{Bin}(N+1, \tfrac12
 
 ### Method 1: Pool all the coins
 
-Since the counts are integers, $A > B$ is the same as $A - B \geq 1$, which after adding $N$ to both
-sides reads
+Since the counts are integers, $A > B$ is the same as $A - B \geq 1$, which after adding $N$ to both sides reads
 
 $$
 A + (N - B) \geq N + 1 .
