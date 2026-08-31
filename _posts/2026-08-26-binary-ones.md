@@ -8,6 +8,7 @@ categories: quant
 ---
 
 # Problem.
+
 Find the total count of 1s when all integers from $1$ to $2^n - 1$ are expressed in binary.
 
 # Solution.

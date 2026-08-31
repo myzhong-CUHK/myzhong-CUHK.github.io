@@ -8,9 +8,10 @@ categories: quant
 ---
 
 # Problem. 
+
 A casino offers a simple card game. There are 52 cards in a deck with 4 cards for each value $2, 3, 4, 5, 6, 7, 8, 9, 10, \overset{\text{jack}}{J}, \overset{\text{queen}}{Q}, \overset{\text{king}}{K}, \overset{\text{ace}}{A}$. Each time the cards are thoroughly shuffled (so each card has equal probability of being selected). You pick up a card from the deck and the dealer picks another one without replacement. If you have a larger number, you win; if the numbers are equal or yours is smaller, the house wins---as in all other casinos the house always has better odds of winning. What is your probability of winning?
 
-# Answer.
+# Solution.
 
 ### Method 1: Stupid Count
 

@@ -8,62 +8,56 @@ categories: quant
 ---
 
 # Problem. 
-A casino offers a simple card game. There are 52 cards in a deck with 4 cards for each value $2, 3, 4, 5, 6, 7, 8, 9, 10, \overset{\text{jack}}{J}, \overset{\text{queen}}{Q}, \overset{\text{king}}{K}, \overset{\text{ace}}{A}$. Each time the cards are thoroughly shuffled (so each card has equal probability of being selected). You pick up a card from the deck and the dealer picks another one without replacement. If you have a larger number, you win; if the numbers are equal or yours is smaller, the house wins---as in all other casinos the house always has better odds of winning. What is your probability of winning?
 
-# Answer.
+A line of 100 airline passengers are waiting to board a plane. They each hold a ticket to one of the 100 seats on that flight. For convenience, let's say that the $n$-th passenger in line has a ticket for the seat number $n$. Being drunk, the first person in line picks a random seat (equally likely for each seat). All of the other passengers are sober, and will go to their proper seats unless it is already occupied; In that case, they will randomly choose a free seat. You're person number 100. What is the probability that you end up in your seat (i.e., seat \#100)?
 
-### Method 1: Stupid Count
+# Solution.
 
-There are $52 \times 51$ possible outcome. The number of "Win" outcomes is
 
-$$
-\begin{aligned}
-&\underbrace{4}_{4 \text{ cards for each value}} \times \underbrace{12 \times 4}_{\text{if my card is an $A$, the house gets $2, \cdots, K$}}\\
-+&\underbrace{4}_{4 \text{ cards for each value}} \times \underbrace{11 \times 4}_{\text{if my card is an $K$, the house gets $2, \cdots, Q$}}\\
-+& \cdots\\
-+&\underbrace{4}_{4 \text{ cards for each value}} \times \underbrace{1 \times 4}_{\text{if my card is an $3$, the house gets $2$}},
-\end{aligned}
-$$
+Exactly $\frac12$, and it does not depend on the number of passengers.
 
-which is in total
+We first note that, if a passenger, say passenger $m$, has to choose at random, the set of free seats at that moment is exactly
 
 $$
-4\times 4 \times \frac{13 \times 12}{2}.
+\{1\} \cup \{m+1, m+2, \dots, n\} ,
 $$
 
-In other words, the probility is 
+a set of size $n - m + 1$.
+
+### Method 1: Recursion
+
+Let $p_n$ be the answer with $n$ passengers. Condition on the drunk's seat.
+
+- Seat $1$, with probability $\frac1n$. Everybody sits correctly and you win.
+- Seat $n$, with probability $\frac1n$. You lose.
+- Seat $k$ for $2 \leq k \leq n-1$, with probability $\frac1n$ each. Then passenger $k$ faces the free set $\{1\} \cup \{k+1, \dots, n\}$, which is the original problem with $n - k + 1$ seats, passenger $k$ in the role of the drunk and seat $1$ in the role of seat $1$.
+
+Hence, writing $m = n - k + 1$,
 
 $$
-\frac{4\times 4 \times \frac{13 \times 12}{2}}{52 \times 51} = \frac{8}{17}.
+p_n = \frac{1}{n}\left(1 + \sum_{m=2}^{n-1} p_m\right), \qquad p_1 = 1 .
 $$
 
-
-### Method 2: Clever 
-
-Denote
+Then $p_2 = \tfrac12$, and if $p_m = \tfrac12$ for all $2 \leq m \leq n-1$,
 
 $$
-\begin{aligned}
-&E_1 = \{\text{My value is larger}\},\\
-&E_2 = \{\text{Same value}\},\\
-&E_3 = \{\text{My value is lower}\}.
-\end{aligned}
+p_n = \frac{1}{n}\left(1 + \frac{n-2}{2}\right) = \frac{1}{2} .
 $$
 
-Then we have
+In other words, $p_n = \frac12$ for all $n$.
+
+### Method 2: A two-horse race between seat 1 and seat 100
+
+If you are forced to choose at random, your free set is $\{1\}$, so you sit in seat $1$. Otherwise seat $n$ was free and you take it. Hence
 
 $$
-\mathbb P (E_1) = \mathbb P (E_3),
+\text{you end up in seat } 1 \text{ or seat } n, \text{ never anywhere else.}
 $$
 
-while 
+Now compare the two. By the lemma, **every** random choice in the whole process is uniform over a set that contains both seat $1$ and seat $n$, since $\{1\} \cup \{m+1, \dots, n\}$ contains $1$ and $n$ for every $m < n$. Neither seat can be taken except by such a choice, because seat $1$'s owner is the drunk, who has already sat, and seat $n$'s owner is you, who boards last.
+
+So the two seats enter and leave the free pool under identical rules, and the first of them to be picked is equally likely to be either. That first pick decides the outcome, and therefore
 
 $$
-\mathbb P (E_2) = \frac{4 \times 13 \times 3}{52 \times 51} = \frac{3}{51}.
-$$
-
-Therefore,
-
-$$
-\mathbb P (E_1) = \frac{8}{17}.
+\mathbb{P}(\text{you get seat } n) = \frac{1}{2} .
 $$

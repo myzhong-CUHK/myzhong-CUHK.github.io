@@ -8,6 +8,7 @@ categories: quant
 ---
 
 # Problem.
+
 Numbers are drawn uniformly at random from $[0, 1]$ until their sum
 exceeds $1$. Find the expected value of the last number drawn.
 
