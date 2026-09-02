@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Meeting in the Final
-date: 2026-09-03 20:00:00+0800
+date: 2026-09-03 01:00:00+0800
 description: Interesting Problem in Quant Interview
 tags: probability
 categories: quant
