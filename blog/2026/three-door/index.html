@@ -1,0 +1,255 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> The Monty Hall Problem | Mingyue Zhong </title> <meta name="author" content="Mingyue Zhong"> <meta name="description" content="Interesting Problem in Quant Interview"> <meta name="keywords" content="Mingyue Zhong, CUHK, multi-agent reinforcement learning, stochastic games, mean-field games, algorithmic collusion, blockchain security, proof of stake, market making"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A6%88&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://myzhong-cuhk.github.io/blog/2026/three-door/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> <link rel="stylesheet" href="/assets/al_email_protect/css/email-protect.css"> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Mingyue</span> Zhong </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/teaching/">teaching </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">The Monty Hall Problem</h1> <p class="post-meta"> Created on September 04, 2026 </p> <p class="post-tags"> <a href="/blog/2026"> <i class="fa-solid fa-calendar fa-sm"></i> 2026 </a>   ·   <a href="/blog/tag/probability"> <i class="fa-solid fa-hashtag fa-sm"></i> probability</a>   ·   <a href="/blog/category/quant"> <i class="fa-solid fa-tag fa-sm"></i> quant</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <h1 id="problem">Problem.</h1> <p>Three doors hide one car and two goats. You pick a door. The host, who knows where the car is, opens one of the other two doors and always reveals a goat. He then offers you the chance to switch to the remaining closed door. Should you?</p> <h1 id="solution">Solution.</h1> <p>Switch. Switching wins with probability $\tfrac23$, staying with probability $\tfrac13$.</p> <h3 id="switching-wins-exactly-when-your-first-guess-was-wrong">Switching wins exactly when your first guess was wrong</h3> <p>That single sentence is the entire solution, and it is worth checking both halves.</p> <p>If your first pick was the car, which happens with probability $\tfrac13$, then both other doors hide goats, the host shows you one of them, and the closed door left over is the other goat. Switching loses.</p> <p>If your first pick was a goat, which happens with probability $\tfrac23$, then the two remaining doors hide one goat and the car. The host cannot open the car, so he is <strong>forced</strong> to open the goat, and the door he leaves closed is the car. Switching wins.</p> <p>So switching turns every wrong first guess into a win and every right one into a loss, and its success probability is exactly the probability of guessing wrong at the start, namely $\tfrac23$.</p> <p>The word doing the work is <em>forced</em>. When you are wrong, the host has no freedom, and he ends up pointing at the car.</p> <h3 id="why-the-intuition-fails">Why the intuition fails</h3> <p>The tempting answer is that two doors remain, so it must be even money. What that misses is that the host’s choice is not random.</p> <p>The probability that your own door hides the car was $\tfrac13$ when you chose it, and nothing that happens afterwards can change it, because the host will open a goat door whatever is behind yours. An event that was certain to occur carries no information. Your door stays at $\tfrac13$, and the whole of the remaining $\tfrac23$ is squeezed onto the one door the host left closed.</p> <h3 id="the-same-thing-by-bayes">The same thing by Bayes</h3> <p>Say you picked door 1 and the host opened door 3.</p> <p>If the car is behind door 1, the host was free to open either 2 or 3, so he opens 3 half the time. If the car is behind door 2, he has no choice and must open 3. If the car is behind door 3, he never opens it. Weighting these by the equal prior of $\tfrac13$, the host opens door 3 with probability</p> \[\tfrac13 \times \tfrac12 \;+\; \tfrac13 \times 1 \;+\; \tfrac13 \times 0 \;=\; \tfrac12 ,\] <p>and the part of that coming from the car being behind door 2 is $\tfrac13 \times 1 = \tfrac13$. So the chance that the car is behind door 2, given what you have seen, is</p> \[\frac{1/3}{1/2} = \frac23 .\] <h3 id="a-hundred-doors">A hundred doors</h3> <p>Replace three doors with a hundred. You pick one, so you are right with probability $\tfrac1{100}$. The host then opens ninety-eight doors, every one a goat, and leaves a single door closed alongside yours.</p> <p>Almost nobody hesitates here. Your door is still the one-in-a-hundred guess you made before anything was revealed, and the other door has absorbed the remaining ninety-nine hundredths. Simulating two hundred thousand rounds gives $0.9901$ for switching against $0.0099$ for staying.</p> <p>The three-door case feels different only because $\tfrac23$ is not as loud as $\tfrac{99}{100}$.</p> <h3 id="what-the-host-knows-is-what-does-the-work">What the host knows is what does the work</h3> <p>Suppose instead the host does not know where the car is and opens one of the other doors at random, and suppose it happens to be a goat. The situation looks identical to you, yet switching is now worth nothing.</p> <p>The reason is that an ignorant host sometimes reveals the car, and those rounds are thrown away. Discarding them removes a larger share of the cases where your first pick was a goat than of the cases where it was the car, and that exactly offsets the advantage. Over five hundred thousand surviving rounds, staying wins $0.4995$ and switching $0.5005$.</p> <p>So the $\tfrac23$ has nothing to do with counting doors. It comes from the host’s knowledge, which is what converts your mistake into a signal.</p> <h3 id="if-the-host-has-a-favourite-door">If the host has a favourite door</h3> <p>One refinement is usually skipped. When your first pick is the car, the host has two goats to choose between, and nothing in the problem says he picks fairly. Let $q$ be the probability that he opens the higher-numbered of the two in that case.</p> <p>Then, given that you picked door 1 and saw door 3 opened, the car is behind door 2 with probability</p> \[\frac{1}{q+1} ,\] <p>which runs from $1$ when $q = 0$ down to $\tfrac12$ when $q = 1$. Simulation at $q = 0, \tfrac14, \tfrac12, \tfrac34, 1$ returns $1.000, 0.800, 0.668, 0.572, 0.501$, matching the formula.</p> <p>Two things are worth taking from this. The familiar $\tfrac23$ is the case $q = \tfrac12$, an unbiased host, which the usual statement of the problem assumes without saying so. And whatever $q$ is, the answer never drops below $\tfrac12$, so switching is never the worse choice even against a host with habits. Averaged over which door he opens, switching still wins $\tfrac23$ of the time for every $q$.</p> </div> </article> <br> <hr> <br> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/nines/">A Thousand Nines</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/knockout-final/">Meeting in the Final</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/pirate/">Locks for a Majority</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/semicircle/">All Points in a Semicircle</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/drunk-passenger/">Drunk Passenger</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/card-gamble/">Cards Game</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/coin-gamble/">One More Coin</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/100dice-mod-7/">One Hundred Dice Modulo Seven</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/binary-ones/">Total Ones in Binary Representations</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/dice/">The Dice Recurrence Problem</a> </li> </ul> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Mingyue Zhong. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. Photos from <a href="https://unsplash.com" target="_blank" rel="external nofollow noopener">Unsplash</a>. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-publications",
+          title: "publications",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "nav-teaching",
+          title: "teaching",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/teaching/";
+          },
+        },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "post-the-monty-hall-problem",
+        
+          title: "The Monty Hall Problem",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/three-door/";
+          
+        },
+      },{id: "post-a-thousand-nines",
+        
+          title: "A Thousand Nines",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/nines/";
+          
+        },
+      },{id: "post-meeting-in-the-final",
+        
+          title: "Meeting in the Final",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/knockout-final/";
+          
+        },
+      },{id: "post-locks-for-a-majority",
+        
+          title: "Locks for a Majority",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/pirate/";
+          
+        },
+      },{id: "post-all-points-in-a-semicircle",
+        
+          title: "All Points in a Semicircle",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/semicircle/";
+          
+        },
+      },{id: "post-drunk-passenger",
+        
+          title: "Drunk Passenger",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/drunk-passenger/";
+          
+        },
+      },{id: "post-cards-game",
+        
+          title: "Cards Game",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/card-gamble/";
+          
+        },
+      },{id: "post-one-more-coin",
+        
+          title: "One More Coin",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/coin-gamble/";
+          
+        },
+      },{id: "post-one-hundred-dice-modulo-seven",
+        
+          title: "One Hundred Dice Modulo Seven",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/100dice-mod-7/";
+          
+        },
+      },{id: "post-total-ones-in-binary-representations",
+        
+          title: "Total Ones in Binary Representations",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/binary-ones/";
+          
+        },
+      },{id: "post-the-dice-recurrence-problem",
+        
+          title: "The Dice Recurrence Problem",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/dice/";
+          
+        },
+      },{id: "post-uniform-sum",
+        
+          title: "Uniform Sum",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/uniform-sum/";
+          
+        },
+      },{id: "news-a-simple-inline-announcement",
+          title: 'A simple inline announcement.',
+          description: "",
+          section: "News",},{id: "news-a-long-announcement-with-details",
+          title: 'A long announcement with details',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/announcement_2/";
+            },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
+          title: 'A simple inline announcement with Markdown emoji! <img class="emoji" title=":sparkles:" alt=":sparkles:" src="https://github.githubassets.com/images/icons/emoji/unicode/2728.png" height="20" width="20"> <img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20">',
+          description: "",
+          section: "News",},{id: "teachings-data-science-fundamentals",
+          title: 'Data Science Fundamentals',
+          description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/teachings/data-science-fundamentals/";
+            },},{id: "teachings-introduction-to-machine-learning",
+          title: 'Introduction to Machine Learning',
+          description: "This course provides an introduction to machine learning concepts, algorithms, and applications. Students will learn about supervised and unsupervised learning, model evaluation, and practical implementations.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/teachings/introduction-to-machine-learning/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%79%6F%75@%65%78%61%6D%70%6C%65.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/myzhong-CUHK", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/Mingyue Zhong", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> <script defer src="/assets/al_email_protect/js/email-protect.js"></script> </body> </html>
