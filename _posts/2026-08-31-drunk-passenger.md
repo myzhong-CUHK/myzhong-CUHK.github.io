@@ -54,7 +54,7 @@ $$
 \text{you end up in seat } 1 \text{ or seat } n, \text{ never anywhere else.}
 $$
 
-Now compare the two. By the lemma, **every** random choice in the whole process is uniform over a set that contains both seat $1$ and seat $n$, since $\{1\} \cup \{m+1, \dots, n\}$ contains $1$ and $n$ for every $m < n$. Neither seat can be taken except by such a choice, because seat $1$'s owner is the drunk, who has already sat, and seat $n$'s owner is you, who boards last.
+Now compare the two. **Every** random choice in the whole process is uniform over a set that contains both seat $1$ and seat $n$, since $\{1\} \cup \{m+1, \dots, n\}$ contains $1$ and $n$ for every $m < n$. Neither seat can be taken except by such a choice, because seat $1$'s owner is the drunk, who has already sat, and seat $n$'s owner is you, who boards last.
 
 So the two seats enter and leave the free pool under identical rules, and the first of them to be picked is equally likely to be either. That first pick decides the outcome, and therefore
 
