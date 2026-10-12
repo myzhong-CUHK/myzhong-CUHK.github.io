@@ -105,4 +105,4 @@ $$
 \mathbb P(\tau_{HHT}<\tau_{HTH})=\frac23.
 $$
 
-The related poster [HHT Before HTH -- A Conditional Waiting Time](2026-09-24-hht-before-hth.md) asks for the expected stopping time conditional on $HHT$ winning. This problem instead asks for the probability that $HTH$ wins. The same prefix transitions support both calculations, but the quantities being computed are different.
+The related poster [HHT Before HTH -- A Conditional Waiting Time]({% post_url 2026-09-24-hht-before-hth %}) asks for the expected stopping time conditional on $HHT$ winning. This problem instead asks for the probability that $HTH$ wins. The same prefix transitions support both calculations, but the quantities being computed are different.
