@@ -11,8 +11,6 @@ categories: quant
 
 You have N cars that are all traveling in the same direction on an infinitely long one-lane highway. Unfortunately, they are all going at different speeds and cannot pass each other. Eventually, the cars will clump up in one or more traffic jams. In terms of N, what is the expected number of clumps of cars?
 
-Example: 314682795.
-
 # Solution.
 
 ### 1. Clumps correspond to record minima
