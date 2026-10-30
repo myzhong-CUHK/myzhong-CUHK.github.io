@@ -1,0 +1,536 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Buffon's Needle | Mingyue Zhong </title> <meta name="author" content="Mingyue Zhong"> <meta name="description" content="An area-ratio proof of the intersection probability for a unit needle"> <meta name="keywords" content="Mingyue Zhong, CUHK, multi-agent reinforcement learning, stochastic games, mean-field games, algorithmic collusion, blockchain security, proof of stake, market making"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A6%88&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://myzhong-cuhk.github.io/blog/2026/buffons-needle/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> <link rel="stylesheet" href="/assets/al_email_protect/css/email-protect.css"> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Mingyue</span> Zhong </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/teaching/">teaching </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Buffon's Needle</h1> <p class="post-meta"> Created on October 29, 2026 </p> <p class="post-tags"> <a href="/blog/2026"> <i class="fa-solid fa-calendar fa-sm"></i> 2026 </a>   ·   <a href="/blog/tag/probability"> <i class="fa-solid fa-hashtag fa-sm"></i> probability</a>   <a href="/blog/tag/geometry"> <i class="fa-solid fa-hashtag fa-sm"></i> geometry</a>   ·   <a href="/blog/category/quant"> <i class="fa-solid fa-tag fa-sm"></i> quant</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <h1 id="problem">Problem.</h1> <p>A needle of length $1$ is dropped onto a plane ruled with parallel lines a distance $1$ apart. What is the probability that the needle intersects at least one line?</p> <h1 id="solution">Solution.</h1> <p>Let $D$ be the midpoint’s distance to the nearest line and $\Theta$ the acute angle between the needle and the lines. For a uniform random throw, $D\sim U(0,1/2)$ and $\Theta\sim U(0,\pi/2)$ independently. Each half of the needle has perpendicular projection $(1/2)\sin\Theta$, so</p> \[\boxed{\{\text{intersection}\} =\left\{D\le\frac12\sin\Theta\right\}.}\] <figure style="margin:1.2rem 0;"> <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 820 310" role="img" aria-labelledby="buffon-title buffon-desc" style="display:block;width:100%;max-width:760px;height:auto;margin:auto;"> <title id="buffon-title">Geometry of Buffon's needle</title> <desc id="buffon-desc">Two horizontal parallel lines are one unit apart. A needle of length one with midpoint C crosses the lower line. D is the distance from C to that line. The acute angle to a horizontal line is theta, and the perpendicular projection of half the needle is one half times sine theta.</desc> <defs> <marker id="buffon-arrow" viewbox="0 0 10 10" refx="5" refy="5" markerwidth="5" markerheight="5" orient="auto-start-reverse"> <path d="M0,0 L10,5 L0,10 Z" fill="currentColor"></path> </marker> </defs> <g fill="none" stroke="currentColor" stroke-width="2"> <path d="M150,30 H755 M150,260 H755"></path> <path d="M105,34 V256" marker-start="url(#buffon-arrow)" marker-end="url(#buffon-arrow)"></path> </g> <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-dasharray="5 5" opacity="0.65"> <path d="M105,30 H150 M105,260 H150 M375,210 H650 M467,141 H650"></path> </g> <path d="M283,279 L467,141" fill="none" stroke="#bc5c32" stroke-width="5" stroke-linecap="round"></path> <circle cx="375" cy="210" r="4.5" fill="currentColor"></circle> <g fill="none" stroke="currentColor" stroke-width="1.5"> <path d="M413,210 A38,38 0 0 0 405.4,187.2"></path> <path d="M565,214 V256" marker-start="url(#buffon-arrow)" marker-end="url(#buffon-arrow)"></path> <path d="M650,145 V206" marker-start="url(#buffon-arrow)" marker-end="url(#buffon-arrow)"></path> </g> <g fill="currentColor" font-family="Georgia, 'Times New Roman', serif" font-size="22"> <text x="80" y="154">1</text> <text x="353" y="198" font-style="italic">C</text> <text x="422" y="199" font-style="italic">θ</text> <text x="401" y="166">1/2</text> <text x="580" y="243" font-style="italic">D</text> <text x="668" y="184">½ sin θ</text> </g> </svg> </figure> <p>The point $(\Theta,D)$ is uniform on the rectangle $\Omega$ in the angle-distance plane. Intersection corresponds to the shaded region $A$:</p> \[\begin{aligned} \Omega&amp;=\left[0,\frac\pi2\right]\times\left[0,\frac12\right],\\ A&amp;=\left\{(\theta,x)\in\Omega:0\le x\le\frac12\sin\theta\right\}. \end{aligned}\] <figure style="margin:1.2rem 0;"> <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 760 350" role="img" aria-labelledby="buffon-area-title buffon-area-desc" style="display:block;width:100%;max-width:700px;height:auto;margin:auto;"> <title id="buffon-area-title">The sample space and the intersection region</title> <desc id="buffon-area-desc">The horizontal axis is the angle theta from zero to pi over two. The vertical axis is the midpoint distance x from zero to one half. The sample space is this rectangle. The shaded region A lies under x equals one half sine theta and corresponds to throws that intersect a line.</desc> <defs> <marker id="buffon-area-arrow" viewbox="0 0 10 10" refx="8" refy="5" markerwidth="6" markerheight="6" orient="auto"> <path d="M0,0 L10,5 L0,10 Z" fill="currentColor"></path> </marker> </defs> <path d="M90.00,300.00 L95.60,296.07 L101.20,292.15 L106.80,288.22 L112.40,284.30 L118.00,280.39 L123.60,276.47 L129.20,272.57 L134.80,268.67 L140.40,264.77 L146.00,260.89 L151.60,257.02 L157.20,253.15 L162.80,249.30 L168.40,245.46 L174.00,241.64 L179.60,237.83 L185.20,234.03 L190.80,230.25 L196.40,226.49 L202.00,222.75 L207.60,219.02 L213.20,215.32 L218.80,211.63 L224.40,207.97 L230.00,204.33 L235.60,200.71 L241.20,197.12 L246.80,193.56 L252.40,190.02 L258.00,186.50 L263.60,183.02 L269.20,179.56 L274.80,176.14 L280.40,172.74 L286.00,169.38 L291.60,166.04 L297.20,162.74 L302.80,159.48 L308.40,156.25 L314.00,153.05 L319.60,149.89 L325.20,146.77 L330.80,143.69 L336.40,140.64 L342.00,137.64 L347.60,134.67 L353.20,131.75 L358.80,128.86 L364.40,126.02 L370.00,123.22 L375.60,120.47 L381.20,117.76 L386.80,115.09 L392.40,112.47 L398.00,109.90 L403.60,107.37 L409.20,104.89 L414.80,102.46 L420.40,100.08 L426.00,97.75 L431.60,95.46 L437.20,93.23 L442.80,91.05 L448.40,88.92 L454.00,86.84 L459.60,84.81 L465.20,82.84 L470.80,80.92 L476.40,79.06 L482.00,77.25 L487.60,75.49 L493.20,73.79 L498.80,72.15 L504.40,70.56 L510.00,69.03 L515.60,67.56 L521.20,66.14 L526.80,64.78 L532.40,63.48 L538.00,62.24 L543.60,61.05 L549.20,59.93 L554.80,58.86 L560.40,57.85 L566.00,56.91 L571.60,56.02 L577.20,55.19 L582.80,54.43 L588.40,53.72 L594.00,53.08 L599.60,52.49 L605.20,51.97 L610.80,51.51 L616.40,51.11 L622.00,50.77 L627.60,50.49 L633.20,50.28 L638.80,50.12 L644.40,50.03 L650.00,50.00 L650,300 Z" fill="#358a8f" fill-opacity="0.24" stroke="none"></path> <rect x="90" y="50" width="560" height="250" fill="none" stroke="currentColor" stroke-width="1.4"></rect> <path d="M90.00,300.00 L95.60,296.07 L101.20,292.15 L106.80,288.22 L112.40,284.30 L118.00,280.39 L123.60,276.47 L129.20,272.57 L134.80,268.67 L140.40,264.77 L146.00,260.89 L151.60,257.02 L157.20,253.15 L162.80,249.30 L168.40,245.46 L174.00,241.64 L179.60,237.83 L185.20,234.03 L190.80,230.25 L196.40,226.49 L202.00,222.75 L207.60,219.02 L213.20,215.32 L218.80,211.63 L224.40,207.97 L230.00,204.33 L235.60,200.71 L241.20,197.12 L246.80,193.56 L252.40,190.02 L258.00,186.50 L263.60,183.02 L269.20,179.56 L274.80,176.14 L280.40,172.74 L286.00,169.38 L291.60,166.04 L297.20,162.74 L302.80,159.48 L308.40,156.25 L314.00,153.05 L319.60,149.89 L325.20,146.77 L330.80,143.69 L336.40,140.64 L342.00,137.64 L347.60,134.67 L353.20,131.75 L358.80,128.86 L364.40,126.02 L370.00,123.22 L375.60,120.47 L381.20,117.76 L386.80,115.09 L392.40,112.47 L398.00,109.90 L403.60,107.37 L409.20,104.89 L414.80,102.46 L420.40,100.08 L426.00,97.75 L431.60,95.46 L437.20,93.23 L442.80,91.05 L448.40,88.92 L454.00,86.84 L459.60,84.81 L465.20,82.84 L470.80,80.92 L476.40,79.06 L482.00,77.25 L487.60,75.49 L493.20,73.79 L498.80,72.15 L504.40,70.56 L510.00,69.03 L515.60,67.56 L521.20,66.14 L526.80,64.78 L532.40,63.48 L538.00,62.24 L543.60,61.05 L549.20,59.93 L554.80,58.86 L560.40,57.85 L566.00,56.91 L571.60,56.02 L577.20,55.19 L582.80,54.43 L588.40,53.72 L594.00,53.08 L599.60,52.49 L605.20,51.97 L610.80,51.51 L616.40,51.11 L622.00,50.77 L627.60,50.49 L633.20,50.28 L638.80,50.12 L644.40,50.03 L650.00,50.00" fill="none" stroke="#bc5c32" stroke-width="3"></path> <g fill="none" stroke="currentColor" stroke-width="1.7"> <path d="M90,312 V20" marker-end="url(#buffon-area-arrow)"></path> <path d="M78,300 H700" marker-end="url(#buffon-area-arrow)"></path> </g> <g fill="currentColor" font-family="Georgia, 'Times New Roman', serif" font-size="22"> <text x="71" y="327">0</text> <text x="633" y="327">π/2</text> <text x="43" y="57">1/2</text> <text x="68" y="24" font-style="italic">x</text> <text x="707" y="308" font-style="italic">θ</text> <text x="129" y="88" font-style="italic">Ω</text> <text x="445" y="233" font-size="28" font-style="italic">A</text> <text x="290" y="103">x = ½ sin θ</text> </g> </svg> </figure> <p>By geometric probability,</p> \[\begin{aligned} \mathbb P(\text{intersection}) &amp;=\frac{\operatorname{Area}(A)}{\operatorname{Area}(\Omega)} &amp;=\frac{\displaystyle\int_0^{\pi/2}\frac12\sin\theta\,d\theta} {\displaystyle\frac\pi2\cdot\frac12} &amp;=\frac2\pi. \end{aligned}\] <h1 id="extension">Extension</h1> <p>Join two unit needles at their midpoints at right angles and drop the cross as above. Let $X$ count its intersections with the parallel lines. Find $\mathbb E[X]$ and $\operatorname{Var}(X)$.</p> <figure style="margin:1.2rem 0;"> <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 900 340" role="img" aria-labelledby="buffon-cross-title buffon-cross-desc" style="display:block;width:100%;max-width:860px;height:auto;margin:auto;"> <title id="buffon-cross-title">A cross can make zero, one, or two intersections</title> <desc id="buffon-cross-desc">Three crosses have the same angle and progressively smaller distances from the lower parallel line. The left cross makes no intersection, the middle cross makes one, and the right cross makes two. Each needle has length one, the line spacing is one, and the two needles meet at a right angle at their common midpoint C. Large dots mark intersections with the lower line.</desc> <g fill="none" stroke="currentColor" stroke-width="1.5"> <path d="M40,45 H270 M40,245 H270"></path> </g> <path d="M75,215 L235,95" stroke="#bc5c32" stroke-width="4" stroke-linecap="round" fill="none"></path> <path d="M95,75 L215,235" stroke="#358a8f" stroke-width="4" stroke-linecap="round" fill="none"></path> <path d="M164.6,147.8 L171.8,157.4 L162.2,164.6" stroke="currentColor" stroke-width="1.2" fill="none"></path> <circle cx="155" cy="155" r="3" fill="currentColor"></circle> <g fill="currentColor" font-family="Georgia, 'Times New Roman', serif"> <text x="155" y="23" text-anchor="middle" font-size="24">X = 0</text> <text x="132" y="152" font-style="italic" font-size="19">C</text> </g> <g fill="none" stroke="currentColor" stroke-width="1.5"> <path d="M335,45 H565 M335,245 H565"></path> </g> <path d="M370,235 L530,115" stroke="#bc5c32" stroke-width="4" stroke-linecap="round" fill="none"></path> <path d="M390,95 L510,255" stroke="#358a8f" stroke-width="4" stroke-linecap="round" fill="none"></path> <path d="M459.6,167.8 L466.8,177.4 L457.2,184.6" stroke="currentColor" stroke-width="1.2" fill="none"></path> <circle cx="450" cy="175" r="3" fill="currentColor"></circle> <g fill="currentColor" font-family="Georgia, 'Times New Roman', serif"> <text x="450" y="23" text-anchor="middle" font-size="24">X = 1</text> <text x="427" y="172" font-style="italic" font-size="19">C</text> </g> <circle cx="502.500" cy="245" r="5.5" fill="currentColor" stroke="#ffffff" stroke-width="1.5"></circle> <g fill="none" stroke="currentColor" stroke-width="1.5"> <path d="M630,45 H860 M630,245 H860"></path> </g> <path d="M665,265 L825,145" stroke="#bc5c32" stroke-width="4" stroke-linecap="round" fill="none"></path> <path d="M685,125 L805,285" stroke="#358a8f" stroke-width="4" stroke-linecap="round" fill="none"></path> <path d="M754.6,197.8 L761.8,207.4 L752.2,214.6" stroke="currentColor" stroke-width="1.2" fill="none"></path> <circle cx="745" cy="205" r="3" fill="currentColor"></circle> <g fill="currentColor" font-family="Georgia, 'Times New Roman', serif"> <text x="745" y="23" text-anchor="middle" font-size="24">X = 2</text> <text x="722" y="202" font-style="italic" font-size="19">C</text> </g> <circle cx="691.667" cy="245" r="5.5" fill="currentColor" stroke="#ffffff" stroke-width="1.5"></circle> <circle cx="775.000" cy="245" r="5.5" fill="currentColor" stroke="#ffffff" stroke-width="1.5"></circle> <path d="M320,315 H350" stroke="#bc5c32" stroke-width="4"></path> <path d="M490,315 H520" stroke="#358a8f" stroke-width="4"></path> <g fill="currentColor" font-family="Georgia, 'Times New Roman', serif" font-size="19"> <text x="361" y="321">needle 1</text> <text x="531" y="321">needle 2</text> </g> </svg> </figure> <p>Using $D,\Theta$ for needle 1, $X=I_1+I_2$ almost surely, where</p> \[I_1=\mathbf1_{\{D\le\frac12\sin\Theta\}}, \qquad I_2=\mathbf1_{\{D\le\frac12\cos\Theta\}}.\] <p>Each needle intersects with probability $2/\pi$, so</p> \[\boxed{\mathbb E[X]=\mathbb E[I_1]+\mathbb E[I_2]=\frac4\pi.}\] <p>Both needles intersect in the region below both curves:</p> <figure style="margin:1.2rem 0;"> <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 760 395" role="img" aria-labelledby="buffon-cross-area-title buffon-cross-area-desc" style="display:block;width:100%;max-width:740px;height:auto;margin:auto;"> <title id="buffon-cross-area-title">Regions for zero, one, and two intersections</title> <desc id="buffon-cross-area-desc">The parameter rectangle has angle theta horizontally from zero to pi over two and distance x vertically from zero to one half. The orange curve is x equals one half sine theta; the teal curve is x equals one half cosine theta. They meet at theta equals pi over four. Below both curves is X equals two; between the curves is X equals one; above both curves is X equals zero.</desc> <defs> <marker id="buffon-cross-area-arrow" viewbox="0 0 10 10" refx="8" refy="5" markerwidth="6" markerheight="6" orient="auto"> <path d="M0,0 L10,5 L0,10 Z" fill="currentColor"></path> </marker> </defs> <path d="M90,50 L650,50 L650.00,50.00 L644.40,50.03 L638.80,50.12 L633.20,50.28 L627.60,50.49 L622.00,50.77 L616.40,51.11 L610.80,51.51 L605.20,51.97 L599.60,52.49 L594.00,53.08 L588.40,53.72 L582.80,54.43 L577.20,55.19 L571.60,56.02 L566.00,56.91 L560.40,57.85 L554.80,58.86 L549.20,59.93 L543.60,61.05 L538.00,62.24 L532.40,63.48 L526.80,64.78 L521.20,66.14 L515.60,67.56 L510.00,69.03 L504.40,70.56 L498.80,72.15 L493.20,73.79 L487.60,75.49 L482.00,77.25 L476.40,79.06 L470.80,80.92 L465.20,82.84 L459.60,84.81 L454.00,86.84 L448.40,88.92 L442.80,91.05 L437.20,93.23 L431.60,95.46 L426.00,97.75 L420.40,100.08 L414.80,102.46 L409.20,104.89 L403.60,107.37 L398.00,109.90 L392.40,112.47 L386.80,115.09 L381.20,117.76 L375.60,120.47 L370.00,123.22 L364.40,120.47 L358.80,117.76 L353.20,115.09 L347.60,112.47 L342.00,109.90 L336.40,107.37 L330.80,104.89 L325.20,102.46 L319.60,100.08 L314.00,97.75 L308.40,95.46 L302.80,93.23 L297.20,91.05 L291.60,88.92 L286.00,86.84 L280.40,84.81 L274.80,82.84 L269.20,80.92 L263.60,79.06 L258.00,77.25 L252.40,75.49 L246.80,73.79 L241.20,72.15 L235.60,70.56 L230.00,69.03 L224.40,67.56 L218.80,66.14 L213.20,64.78 L207.60,63.48 L202.00,62.24 L196.40,61.05 L190.80,59.93 L185.20,58.86 L179.60,57.85 L174.00,56.91 L168.40,56.02 L162.80,55.19 L157.20,54.43 L151.60,53.72 L146.00,53.08 L140.40,52.49 L134.80,51.97 L129.20,51.51 L123.60,51.11 L118.00,50.77 L112.40,50.49 L106.80,50.28 L101.20,50.12 L95.60,50.03 L90.00,50.00 Z" fill="currentColor" fill-opacity="0.07"></path> <path d="M90.00,50.00 L95.60,50.03 L101.20,50.12 L106.80,50.28 L112.40,50.49 L118.00,50.77 L123.60,51.11 L129.20,51.51 L134.80,51.97 L140.40,52.49 L146.00,53.08 L151.60,53.72 L157.20,54.43 L162.80,55.19 L168.40,56.02 L174.00,56.91 L179.60,57.85 L185.20,58.86 L190.80,59.93 L196.40,61.05 L202.00,62.24 L207.60,63.48 L213.20,64.78 L218.80,66.14 L224.40,67.56 L230.00,69.03 L235.60,70.56 L241.20,72.15 L246.80,73.79 L252.40,75.49 L258.00,77.25 L263.60,79.06 L269.20,80.92 L274.80,82.84 L280.40,84.81 L286.00,86.84 L291.60,88.92 L297.20,91.05 L302.80,93.23 L308.40,95.46 L314.00,97.75 L319.60,100.08 L325.20,102.46 L330.80,104.89 L336.40,107.37 L342.00,109.90 L347.60,112.47 L353.20,115.09 L358.80,117.76 L364.40,120.47 L370.00,123.22 L375.60,120.47 L381.20,117.76 L386.80,115.09 L392.40,112.47 L398.00,109.90 L403.60,107.37 L409.20,104.89 L414.80,102.46 L420.40,100.08 L426.00,97.75 L431.60,95.46 L437.20,93.23 L442.80,91.05 L448.40,88.92 L454.00,86.84 L459.60,84.81 L465.20,82.84 L470.80,80.92 L476.40,79.06 L482.00,77.25 L487.60,75.49 L493.20,73.79 L498.80,72.15 L504.40,70.56 L510.00,69.03 L515.60,67.56 L521.20,66.14 L526.80,64.78 L532.40,63.48 L538.00,62.24 L543.60,61.05 L549.20,59.93 L554.80,58.86 L560.40,57.85 L566.00,56.91 L571.60,56.02 L577.20,55.19 L582.80,54.43 L588.40,53.72 L594.00,53.08 L599.60,52.49 L605.20,51.97 L610.80,51.51 L616.40,51.11 L622.00,50.77 L627.60,50.49 L633.20,50.28 L638.80,50.12 L644.40,50.03 L650.00,50.00 L650.00,300.00 L644.40,296.07 L638.80,292.15 L633.20,288.22 L627.60,284.30 L622.00,280.39 L616.40,276.47 L610.80,272.57 L605.20,268.67 L599.60,264.77 L594.00,260.89 L588.40,257.02 L582.80,253.15 L577.20,249.30 L571.60,245.46 L566.00,241.64 L560.40,237.83 L554.80,234.03 L549.20,230.25 L543.60,226.49 L538.00,222.75 L532.40,219.02 L526.80,215.32 L521.20,211.63 L515.60,207.97 L510.00,204.33 L504.40,200.71 L498.80,197.12 L493.20,193.56 L487.60,190.02 L482.00,186.50 L476.40,183.02 L470.80,179.56 L465.20,176.14 L459.60,172.74 L454.00,169.38 L448.40,166.04 L442.80,162.74 L437.20,159.48 L431.60,156.25 L426.00,153.05 L420.40,149.89 L414.80,146.77 L409.20,143.69 L403.60,140.64 L398.00,137.64 L392.40,134.67 L386.80,131.75 L381.20,128.86 L375.60,126.02 L370.00,123.22 L364.40,126.02 L358.80,128.86 L353.20,131.75 L347.60,134.67 L342.00,137.64 L336.40,140.64 L330.80,143.69 L325.20,146.77 L319.60,149.89 L314.00,153.05 L308.40,156.25 L302.80,159.48 L297.20,162.74 L291.60,166.04 L286.00,169.38 L280.40,172.74 L274.80,176.14 L269.20,179.56 L263.60,183.02 L258.00,186.50 L252.40,190.02 L246.80,193.56 L241.20,197.12 L235.60,200.71 L230.00,204.33 L224.40,207.97 L218.80,211.63 L213.20,215.32 L207.60,219.02 L202.00,222.75 L196.40,226.49 L190.80,230.25 L185.20,234.03 L179.60,237.83 L174.00,241.64 L168.40,245.46 L162.80,249.30 L157.20,253.15 L151.60,257.02 L146.00,260.89 L140.40,264.77 L134.80,268.67 L129.20,272.57 L123.60,276.47 L118.00,280.39 L112.40,284.30 L106.80,288.22 L101.20,292.15 L95.60,296.07 L90.00,300.00 Z" fill="#c9933d" fill-opacity="0.15"></path> <path d="M90.00,300.00 L95.60,296.07 L101.20,292.15 L106.80,288.22 L112.40,284.30 L118.00,280.39 L123.60,276.47 L129.20,272.57 L134.80,268.67 L140.40,264.77 L146.00,260.89 L151.60,257.02 L157.20,253.15 L162.80,249.30 L168.40,245.46 L174.00,241.64 L179.60,237.83 L185.20,234.03 L190.80,230.25 L196.40,226.49 L202.00,222.75 L207.60,219.02 L213.20,215.32 L218.80,211.63 L224.40,207.97 L230.00,204.33 L235.60,200.71 L241.20,197.12 L246.80,193.56 L252.40,190.02 L258.00,186.50 L263.60,183.02 L269.20,179.56 L274.80,176.14 L280.40,172.74 L286.00,169.38 L291.60,166.04 L297.20,162.74 L302.80,159.48 L308.40,156.25 L314.00,153.05 L319.60,149.89 L325.20,146.77 L330.80,143.69 L336.40,140.64 L342.00,137.64 L347.60,134.67 L353.20,131.75 L358.80,128.86 L364.40,126.02 L370.00,123.22 L375.60,126.02 L381.20,128.86 L386.80,131.75 L392.40,134.67 L398.00,137.64 L403.60,140.64 L409.20,143.69 L414.80,146.77 L420.40,149.89 L426.00,153.05 L431.60,156.25 L437.20,159.48 L442.80,162.74 L448.40,166.04 L454.00,169.38 L459.60,172.74 L465.20,176.14 L470.80,179.56 L476.40,183.02 L482.00,186.50 L487.60,190.02 L493.20,193.56 L498.80,197.12 L504.40,200.71 L510.00,204.33 L515.60,207.97 L521.20,211.63 L526.80,215.32 L532.40,219.02 L538.00,222.75 L543.60,226.49 L549.20,230.25 L554.80,234.03 L560.40,237.83 L566.00,241.64 L571.60,245.46 L577.20,249.30 L582.80,253.15 L588.40,257.02 L594.00,260.89 L599.60,264.77 L605.20,268.67 L610.80,272.57 L616.40,276.47 L622.00,280.39 L627.60,284.30 L633.20,288.22 L638.80,292.15 L644.40,296.07 L650.00,300.00 L650,300 L90,300 Z" fill="#358a8f" fill-opacity="0.25"></path> <rect x="90" y="50" width="560" height="250" fill="none" stroke="currentColor" stroke-width="1.4"></rect> <path d="M90.00,300.00 L95.60,296.07 L101.20,292.15 L106.80,288.22 L112.40,284.30 L118.00,280.39 L123.60,276.47 L129.20,272.57 L134.80,268.67 L140.40,264.77 L146.00,260.89 L151.60,257.02 L157.20,253.15 L162.80,249.30 L168.40,245.46 L174.00,241.64 L179.60,237.83 L185.20,234.03 L190.80,230.25 L196.40,226.49 L202.00,222.75 L207.60,219.02 L213.20,215.32 L218.80,211.63 L224.40,207.97 L230.00,204.33 L235.60,200.71 L241.20,197.12 L246.80,193.56 L252.40,190.02 L258.00,186.50 L263.60,183.02 L269.20,179.56 L274.80,176.14 L280.40,172.74 L286.00,169.38 L291.60,166.04 L297.20,162.74 L302.80,159.48 L308.40,156.25 L314.00,153.05 L319.60,149.89 L325.20,146.77 L330.80,143.69 L336.40,140.64 L342.00,137.64 L347.60,134.67 L353.20,131.75 L358.80,128.86 L364.40,126.02 L370.00,123.22 L375.60,120.47 L381.20,117.76 L386.80,115.09 L392.40,112.47 L398.00,109.90 L403.60,107.37 L409.20,104.89 L414.80,102.46 L420.40,100.08 L426.00,97.75 L431.60,95.46 L437.20,93.23 L442.80,91.05 L448.40,88.92 L454.00,86.84 L459.60,84.81 L465.20,82.84 L470.80,80.92 L476.40,79.06 L482.00,77.25 L487.60,75.49 L493.20,73.79 L498.80,72.15 L504.40,70.56 L510.00,69.03 L515.60,67.56 L521.20,66.14 L526.80,64.78 L532.40,63.48 L538.00,62.24 L543.60,61.05 L549.20,59.93 L554.80,58.86 L560.40,57.85 L566.00,56.91 L571.60,56.02 L577.20,55.19 L582.80,54.43 L588.40,53.72 L594.00,53.08 L599.60,52.49 L605.20,51.97 L610.80,51.51 L616.40,51.11 L622.00,50.77 L627.60,50.49 L633.20,50.28 L638.80,50.12 L644.40,50.03 L650.00,50.00" fill="none" stroke="#bc5c32" stroke-width="3"></path> <path d="M90.00,50.00 L95.60,50.03 L101.20,50.12 L106.80,50.28 L112.40,50.49 L118.00,50.77 L123.60,51.11 L129.20,51.51 L134.80,51.97 L140.40,52.49 L146.00,53.08 L151.60,53.72 L157.20,54.43 L162.80,55.19 L168.40,56.02 L174.00,56.91 L179.60,57.85 L185.20,58.86 L190.80,59.93 L196.40,61.05 L202.00,62.24 L207.60,63.48 L213.20,64.78 L218.80,66.14 L224.40,67.56 L230.00,69.03 L235.60,70.56 L241.20,72.15 L246.80,73.79 L252.40,75.49 L258.00,77.25 L263.60,79.06 L269.20,80.92 L274.80,82.84 L280.40,84.81 L286.00,86.84 L291.60,88.92 L297.20,91.05 L302.80,93.23 L308.40,95.46 L314.00,97.75 L319.60,100.08 L325.20,102.46 L330.80,104.89 L336.40,107.37 L342.00,109.90 L347.60,112.47 L353.20,115.09 L358.80,117.76 L364.40,120.47 L370.00,123.22 L375.60,126.02 L381.20,128.86 L386.80,131.75 L392.40,134.67 L398.00,137.64 L403.60,140.64 L409.20,143.69 L414.80,146.77 L420.40,149.89 L426.00,153.05 L431.60,156.25 L437.20,159.48 L442.80,162.74 L448.40,166.04 L454.00,169.38 L459.60,172.74 L465.20,176.14 L470.80,179.56 L476.40,183.02 L482.00,186.50 L487.60,190.02 L493.20,193.56 L498.80,197.12 L504.40,200.71 L510.00,204.33 L515.60,207.97 L521.20,211.63 L526.80,215.32 L532.40,219.02 L538.00,222.75 L543.60,226.49 L549.20,230.25 L554.80,234.03 L560.40,237.83 L566.00,241.64 L571.60,245.46 L577.20,249.30 L582.80,253.15 L588.40,257.02 L594.00,260.89 L599.60,264.77 L605.20,268.67 L610.80,272.57 L616.40,276.47 L622.00,280.39 L627.60,284.30 L633.20,288.22 L638.80,292.15 L644.40,296.07 L650.00,300.00" fill="none" stroke="#358a8f" stroke-width="3"></path> <path d="M370,123.223 V300" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="4 5" opacity="0.4"></path> <g fill="none" stroke="currentColor" stroke-width="1.7"> <path d="M90,312 V20" marker-end="url(#buffon-cross-area-arrow)"></path> <path d="M78,300 H700" marker-end="url(#buffon-cross-area-arrow)"></path> </g> <g fill="currentColor" font-family="Georgia, 'Times New Roman', serif" font-size="22"> <text x="71" y="327">0</text> <text x="633" y="327">π/2</text> <text x="352" y="327">π/4</text> <text x="43" y="57">1/2</text> <text x="68" y="24" font-style="italic">x</text> <text x="707" y="308" font-style="italic">θ</text> <text x="370" y="84" text-anchor="middle">X = 0</text> <text x="205" y="172" text-anchor="middle">X = 1</text> <text x="535" y="172" text-anchor="middle">X = 1</text> <text x="370" y="238" text-anchor="middle">X = 2</text> </g> <path d="M160,365 H190" stroke="#bc5c32" stroke-width="3"></path> <path d="M430,365 H460" stroke="#358a8f" stroke-width="3"></path> <g font-family="Georgia, 'Times New Roman', serif" font-size="21" fill="currentColor"> <text x="202" y="372">x = ½ sin θ</text> <text x="472" y="372">x = ½ cos θ</text> </g> </svg> </figure> \[\begin{aligned} \mathbb E[I_1I_2] &amp;=\mathbb P(X=2) =\frac{\displaystyle\int_0^{\pi/2}\frac12\min\{\sin\theta,\cos\theta\}\,d\theta} {\displaystyle\frac\pi2\cdot\frac12} =\frac{4-2\sqrt2}{\pi}. \end{aligned}\] <p>Using $I_j^2=I_j$,</p> \[\begin{aligned} \operatorname{Var}(X) &amp;=\mathbb E[X]+2\mathbb E[I_1I_2]-(\mathbb E[X])^2\\ &amp;=\boxed{\frac{12-4\sqrt2}{\pi}-\frac{16}{\pi^2}}. \end{aligned}\] </div> </article> <br> <hr> <br> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/two-envelopes-with-a-uniform-prior/">Two Envelopes with a Uniform Prior</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/hth-before-hht/">HTH Before HHT -- A Pattern Race</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/traffic-clumps/">Traffic Clumps and Record Minima</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/normal-conditional-expectation/">A Conditional Expectation for Normal Variables</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/linear-regression-review/">A Mathematical Review of Linear Regression</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/gamma-exponential-chi-square-normal/">Gamma Exponential Chi Square and Normal Distributions</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/acute-triangle-on-a-circle/">An Acute Triangle on a Circle</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/three-people-at-a-round-table/">Three People at a Round Table</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/ants-on-a-string/">Ants on a String</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/two-shopping-cart-rows/">Two Rows of Shopping Carts</a> </li> </ul> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Mingyue Zhong. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. Photos from <a href="https://unsplash.com" target="_blank" rel="external nofollow noopener">Unsplash</a>. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-publications",
+          title: "publications",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "nav-teaching",
+          title: "teaching",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/teaching/";
+          },
+        },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "post-buffon-39-s-needle",
+        
+          title: "Buffon's Needle",
+        
+        description: "An area-ratio proof of the intersection probability for a unit needle",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/buffons-needle/";
+          
+        },
+      },{id: "post-two-envelopes-with-a-uniform-prior",
+        
+          title: "Two Envelopes with a Uniform Prior",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/two-envelopes-with-a-uniform-prior/";
+          
+        },
+      },{id: "post-hth-before-hht-a-pattern-race",
+        
+          title: "HTH Before HHT -- A Pattern Race",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/hth-before-hht/";
+          
+        },
+      },{id: "post-traffic-clumps-and-record-minima",
+        
+          title: "Traffic Clumps and Record Minima",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/traffic-clumps/";
+          
+        },
+      },{id: "post-a-conditional-expectation-for-normal-variables",
+        
+          title: "A Conditional Expectation for Normal Variables",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/normal-conditional-expectation/";
+          
+        },
+      },{id: "post-a-mathematical-review-of-linear-regression",
+        
+          title: "A Mathematical Review of Linear Regression",
+        
+        description: "Least squares, projection geometry, inference, and estimability",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/linear-regression-review/";
+          
+        },
+      },{id: "post-gamma-exponential-chi-square-and-normal-distributions",
+        
+          title: "Gamma Exponential Chi Square and Normal Distributions",
+        
+        description: "Definitions and derivations linking waiting times, Gaussian squares, and sampling distributions",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/gamma-exponential-chi-square-normal/";
+          
+        },
+      },{id: "post-an-acute-triangle-on-a-circle",
+        
+          title: "An Acute Triangle on a Circle",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/acute-triangle-on-a-circle/";
+          
+        },
+      },{id: "post-three-people-at-a-round-table",
+        
+          title: "Three People at a Round Table",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/three-people-at-a-round-table/";
+          
+        },
+      },{id: "post-ants-on-a-string",
+        
+          title: "Ants on a String",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/ants-on-a-string/";
+          
+        },
+      },{id: "post-two-rows-of-shopping-carts",
+        
+          title: "Two Rows of Shopping Carts",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/two-shopping-cart-rows/";
+          
+        },
+      },{id: "post-hht-before-hth-a-conditional-waiting-time",
+        
+          title: "HHT Before HTH -- A Conditional Waiting Time",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/hht-before-hth/";
+          
+        },
+      },{id: "post-stars-and-bars-empty-and-nonempty-groups",
+        
+          title: "Stars and Bars -- Empty and Nonempty Groups",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/stars-and-bars/";
+          
+        },
+      },{id: "post-lattice-paths-with-no-three-consecutive-steps",
+        
+          title: "Lattice Paths with No Three Consecutive Steps",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/sig1-lattice-paths/";
+          
+        },
+      },{id: "post-flipping-one-hundred-cards",
+        
+          title: "Flipping One Hundred Cards",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/flipping-one-hundred-cards/";
+          
+        },
+      },{id: "post-the-first-ace",
+        
+          title: "The First Ace",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/first-ace/";
+          
+        },
+      },{id: "post-noodle-loops",
+        
+          title: "Noodle Loops",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/noodle-loops/";
+          
+        },
+      },{id: "post-two-cards-far-apart",
+        
+          title: "Two Cards Far Apart",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/two-cards-far-apart/";
+          
+        },
+      },{id: "post-three-bags-of-coins",
+        
+          title: "Three Bags of Coins",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/coin-weighing/";
+          
+        },
+      },{id: "post-trailing-zeros-of-a-factorial",
+        
+          title: "Trailing Zeros of a Factorial",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/factorial-trailing-zeros/";
+          
+        },
+      },{id: "post-a-review-about-poisson-process-forward-and-backward-recurrence-times",
+        
+          title: "A Review about Poisson Process -- Forward and Backward Recurrence Times",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/poisson/";
+          
+        },
+      },{id: "post-gambler-39-s-ruin",
+        
+          title: "Gambler's Ruin",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/rw/";
+          
+        },
+      },{id: "post-an-ace-each",
+        
+          title: "An Ace Each",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/four-aces/";
+          
+        },
+      },{id: "post-head-then-tail",
+        
+          title: "Head Then Tail",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/toss-HT/";
+          
+        },
+      },{id: "post-candies-in-a-jar",
+        
+          title: "Candies in a Jar",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/candies/";
+          
+        },
+      },{id: "post-amoeba-extinction",
+        
+          title: "Amoeba Extinction",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/amoeba/";
+          
+        },
+      },{id: "post-the-monty-hall-problem-the-three-door-problem",
+        
+          title: "The Monty Hall Problem (The Three Door Problem)",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/three-door/";
+          
+        },
+      },{id: "post-a-thousand-nines",
+        
+          title: "A Thousand Nines",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/nines/";
+          
+        },
+      },{id: "post-meeting-in-the-final",
+        
+          title: "Meeting in the Final",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/knockout-final/";
+          
+        },
+      },{id: "post-locks-for-a-majority",
+        
+          title: "Locks for a Majority",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/pirate/";
+          
+        },
+      },{id: "post-all-points-in-a-semicircle",
+        
+          title: "All Points in a Semicircle",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/semicircle/";
+          
+        },
+      },{id: "post-drunk-passenger",
+        
+          title: "Drunk Passenger",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/drunk-passenger/";
+          
+        },
+      },{id: "post-cards-game",
+        
+          title: "Cards Game",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/card-gamble/";
+          
+        },
+      },{id: "post-one-more-coin",
+        
+          title: "One More Coin",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/coin-gamble/";
+          
+        },
+      },{id: "post-one-hundred-dice-modulo-seven",
+        
+          title: "One Hundred Dice Modulo Seven",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/100dice-mod-7/";
+          
+        },
+      },{id: "post-total-ones-in-binary-representations",
+        
+          title: "Total Ones in Binary Representations",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/binary-ones/";
+          
+        },
+      },{id: "post-the-dice-recurrence-problem",
+        
+          title: "The Dice Recurrence Problem",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/dice/";
+          
+        },
+      },{id: "post-uniform-sum",
+        
+          title: "Uniform Sum",
+        
+        description: "Interesting Problem in Quant Interview",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/uniform-sum/";
+          
+        },
+      },{id: "news-a-simple-inline-announcement",
+          title: 'A simple inline announcement.',
+          description: "",
+          section: "News",},{id: "news-a-long-announcement-with-details",
+          title: 'A long announcement with details',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/announcement_2/";
+            },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
+          title: 'A simple inline announcement with Markdown emoji! <img class="emoji" title=":sparkles:" alt=":sparkles:" src="https://github.githubassets.com/images/icons/emoji/unicode/2728.png" height="20" width="20"> <img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20">',
+          description: "",
+          section: "News",},{id: "teachings-seem2520-fundamentals-in-financial-engineering-and-financial-technology",
+          title: 'SEEM2520 Fundamentals in Financial Engineering and Financial Technology',
+          description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/teachings/data-science-fundamentals/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%79%6F%75@%65%78%61%6D%70%6C%65.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/myzhong-CUHK", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/Mingyue Zhong", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> <script defer src="/assets/al_email_protect/js/email-protect.js"></script> </body> </html>
